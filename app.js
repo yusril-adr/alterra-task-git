@@ -1,11 +1,11 @@
 const Database = require('./database');
 
-const getUserByUsername = (username, Db) => {
+const getUserByUsername = (Db, username) => {
   return Db.users.find((user) => user.username === username);
 }
 
 const validateUser = (Db, { username, password }) => {
-  const user = Db.users.find((user) => user.username === username);
+  const user = getUserByUsername(Db, username)
 
   if (!user) {
     console.log(`User ${username} Tidak ditemukan.`);
@@ -22,7 +22,7 @@ const validateUser = (Db, { username, password }) => {
 
 const app = () => {
   const username = 'John_Doe';
-  user = getUserByUsername(username, Database);
+  user = getUserByUsername(Database, username);
   console.log('User ditemukan : ', user);
 
   console.log('Memvalidasi User ...');
