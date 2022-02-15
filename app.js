@@ -20,6 +20,10 @@ const validateUser = (Db, { username, password }) => {
   return true;
 };
 
+const searchUserByUsername = (Db, keyword) => {
+  return Db.users.filter((user) => user.username.toLowerCase().includes(keyword.toLowerCase()));
+};
+
 const app = () => {
   const username = 'John_Doe';
   user = getUserByUsername(Database, username);
@@ -31,6 +35,10 @@ const app = () => {
     return;
   }
   console.log('Validasi Berhasil.');
+
+  const searchUsername = 'Pete';
+  const searchResult = searchUserByUsername(Database, searchUsername);
+  console.log(`Hasil pencarian user dengan keyword ${searchUsername}: `, searchResult);
 };
 
 app();
